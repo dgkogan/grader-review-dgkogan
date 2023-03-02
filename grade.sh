@@ -1,4 +1,4 @@
-CPATH='.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
+CPATH='.;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar'
 
 rm -rf student-submission
 git clone $1 student-submission
@@ -17,7 +17,7 @@ fi
 cp ListExamples.java ..
 cd ..
 
-javac -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" *.java 2>javac-errs.txt
+javac -cp CPATH *.java
 
 if [[ $? -eq 0 ]]
     then
@@ -27,7 +27,7 @@ if [[ $? -eq 0 ]]
         exit 1
 fi
 
-java -cp ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar" org.junit.runner.JUnitCore TestListExamples.java > out.txt
+java -cp CPATH org.junit.runner.JUnitCore TestListExamples > out.txt
 
 if [[ `grep "FAILURES" out.txt` != "" ]]
     then 
